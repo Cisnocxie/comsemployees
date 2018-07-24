@@ -1,4 +1,4 @@
-package com.oocl.comsemployees.bean;
+package com.oocl.comsemployees.beans;
 
 import java.util.List;
 
