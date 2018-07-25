@@ -8,8 +8,8 @@ public class Company {
     private int employeesNumber;
     private List<Employee> employees;
 
-    public Company(int id, String companyName, int employeesNumber, List<Employee> employees) {
-        this.id = id;
+    public Company(String companyName, int employeesNumber, List<Employee> employees) {
+        this.id = this.hashCode();
         this.companyName = companyName;
         this.employeesNumber = employeesNumber;
         this.employees = employees;

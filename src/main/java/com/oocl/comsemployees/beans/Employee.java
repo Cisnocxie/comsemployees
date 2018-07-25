@@ -7,8 +7,8 @@ public class Employee {
     private String gender;
     private int salary;
 
-    public Employee(int id, String name, int age, String gender, int salary) {
-        this.id = id;
+    public Employee(String name, int age, String gender, int salary) {
+        this.id = this.hashCode();
         this.name = name;
         this.age = age;
         this.gender = gender;

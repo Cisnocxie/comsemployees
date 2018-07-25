@@ -11,8 +11,8 @@ import java.util.List;
 @Component
 public class CompanyService {
     private List<Company> companies = new ArrayList<>(Arrays.asList(
-            new Company(1, "aaa", 25, new ArrayList<Employee>(
-                    Arrays.asList(new Employee(1, "a1", 21, "male", 6000)
+            new Company("aaa", 25, new ArrayList<Employee>(
+                    Arrays.asList(new Employee("a1", 21, "male", 6000)
             )))
     ));
 
@@ -22,5 +22,9 @@ public class CompanyService {
 
     public Company getCompany(int id) {
         return companies.stream().filter(company -> company.getId() == id).findFirst().get();
+    }
+
+    public boolean postCompany(Company company) {
+        return companies.add(company);
     }
 }
