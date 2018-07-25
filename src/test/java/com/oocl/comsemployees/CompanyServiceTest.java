@@ -31,4 +31,12 @@ public class CompanyServiceTest {
 
         assertThat(companyService.postCompany(company), is(true));
     }
+
+    @Test
+    public void should_get_true_when_call_putCompany_given_a_exist_id() {
+        Company company = new Company("bbc", 50, new ArrayList<>());
+        companyService.postCompany(company);
+
+        assertThat(companyService.putCompany(company.getId(), new Company("aaq", 50, new ArrayList<>())), is(true));
+    }
 }

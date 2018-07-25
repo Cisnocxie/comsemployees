@@ -4,13 +4,13 @@ import java.util.List;
 
 public class Company {
     private int id;
-    private String companyName;
+    private String name;
     private int employeesNumber;
     private List<Employee> employees;
 
-    public Company(String companyName, int employeesNumber, List<Employee> employees) {
+    public Company(String name, int employeesNumber, List<Employee> employees) {
         this.id = this.hashCode();
-        this.companyName = companyName;
+        this.name = name;
         this.employeesNumber = employeesNumber;
         this.employees = employees;
     }
@@ -24,11 +24,11 @@ public class Company {
     }
 
     public String getCompanyName() {
-        return companyName;
+        return name;
     }
 
     public void setCompanyName(String companyName) {
-        this.companyName = companyName;
+        this.name = companyName;
     }
 
     public int getEmployeesNumber() {

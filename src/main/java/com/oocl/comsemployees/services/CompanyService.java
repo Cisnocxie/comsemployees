@@ -7,6 +7,7 @@ import org.springframework.stereotype.Component;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Optional;
 
 @Component
 public class CompanyService {
@@ -26,5 +27,15 @@ public class CompanyService {
 
     public boolean postCompany(Company company) {
         return companies.add(company);
+    }
+
+    public boolean putCompany(int companyId, Company company) {
+        boolean isSuccess = false;
+        Optional optional = companies.stream().filter(company1 -> company1.getId() == companyId).findFirst();
+        if (optional.isPresent()) {
+            companies.set(companies.indexOf(optional.get()), company);
+            isSuccess = true;
+        }
+        return isSuccess;
     }
 }
