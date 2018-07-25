@@ -15,12 +15,12 @@ public class Company {
         this.employees = employees;
     }
 
-    public int getId() {
-        return id;
+    public boolean addEmployee(Employee employee) {
+        return employees.add(employee);
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public int getId() {
+        return id;
     }
 
     public String getCompanyName() {
@@ -41,9 +41,5 @@ public class Company {
 
     public List<Employee> getEmployees() {
         return employees;
-    }
-
-    public void setEmployees(List<Employee> employees) {
-        this.employees = employees;
     }
 }

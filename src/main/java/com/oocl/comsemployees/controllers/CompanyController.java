@@ -1,5 +1,6 @@
 package com.oocl.comsemployees.controllers;
 
+import com.oocl.comsemployees.Database;
 import com.oocl.comsemployees.beans.Company;
 import com.oocl.comsemployees.services.CompanyService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,6 +32,14 @@ public class CompanyController {
     public Map<String, String> putCompany(@PathVariable int companyId, @RequestBody Company company) {
         Map<String, String> map = new HashMap<>();
         map.put("issuccess", companyService.putCompany(companyId, company) ? "true" : "false");
+        return map;
+    }
+
+    @DeleteMapping("/companies/{companyId}")
+    public Map<String, String> deleteCompany(@PathVariable int companyId) {
+        Map<String, String> map = new HashMap<>();
+
+        map.put("issuccess", companyService.deleteCompany(companyId) ? "true" : "false");
         return map;
     }
 }
