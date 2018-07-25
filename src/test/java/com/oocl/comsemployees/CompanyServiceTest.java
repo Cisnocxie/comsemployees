@@ -39,4 +39,9 @@ public class CompanyServiceTest {
 
         assertThat(companyService.putCompany(company.getId(), new Company("aaq", 50, new ArrayList<>())), is(true));
     }
+
+    @Test
+    public void should_get_false_when_call_putCompany_given_a_unexist_id() {
+        assertThat(companyService.putCompany(123, new Company("aaq", 50, new ArrayList<>())), is(false));
+    }
 }
