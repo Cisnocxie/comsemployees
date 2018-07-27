@@ -53,8 +53,9 @@ public class CompanyServiceTest {
         companyService.postCompany(company);
         employeeService.postEmployee(employee);
 
-        company.getEmployees().stream().forEach(employee1 -> employeeService.getAllEmployees().remove(employee1));
+        company.getEmployees().forEach( employee1 -> employeeService.getAllEmployees().remove(employee1));
         companyService.getAllCompanies().remove(company);
         assertThat(employeeService.getAllEmployees().size(), is(0));
+        assertThat(companyService.getAllCompanies().size(), is(0));
     }
 }

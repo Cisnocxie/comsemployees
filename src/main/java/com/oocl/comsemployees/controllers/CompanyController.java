@@ -2,6 +2,7 @@ package com.oocl.comsemployees.controllers;
 
 import com.oocl.comsemployees.Database;
 import com.oocl.comsemployees.beans.Company;
+import com.oocl.comsemployees.beans.Employee;
 import com.oocl.comsemployees.services.CompanyService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -41,5 +42,15 @@ public class CompanyController {
 
         map.put("issuccess", companyService.deleteCompany(companyId) ? "true" : "false");
         return map;
+    }
+
+    @GetMapping("/companies/{id}/employees")
+    public List<Employee> getEmployeesOfCompany(@PathVariable int id) {
+
+    }
+
+    @GetMapping("/companies/page/{page}/pageSize/{size}")
+    public List<Company> getCompaniesInPage(@PathVariable int page, @PathVariable int size) {
+
     }
 }
