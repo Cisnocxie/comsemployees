@@ -77,7 +77,29 @@ public class CompanyControllerTest {
     }
 
     @Test
-    public void
+    public void putCompany() throws Exception {
+        //given
+        Company company1 = new Company("abc", 20, new ArrayList<>());
+        Company company2 = new Company("xyz", 50, new ArrayList<>());
+        given(service.putCompany(anyLong(), any(Company.class))).willReturn(company2);
 
+        //when
+        ResultActions resultActions = mockMvc.perform(put("/companies/{0}", 1L)
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(mapper.writeValueAsString(company2)));
 
+        //then
+        resultActions
+                .andExpect(jsonPath("$.name", is("xyz")))
+                .andExpect(jsonPath("$.employeesNumber", is(50)));
+    }
+
+    @Test
+    public void deleteCompany() throws Exception {
+        //given
+        Company company1 = new Company("abc", 20, new ArrayList<>());
+
+        //when, then
+        mockMvc.perform(delete("/companies/{0}", 1L));
+    }
 }
