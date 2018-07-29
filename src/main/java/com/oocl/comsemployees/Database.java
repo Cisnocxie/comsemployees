@@ -17,10 +17,14 @@ public class Database {
     }
 
     public static Company getCompany(int id) {
-        return companies.stream().filter(company -> company.getId() == id).findFirst().get();
+        return companies.stream().filter(company -> company.getId() == id).findFirst().orElse(null);
     }
 
     public static List<Employee> getAllEmployees() {
         return employees;
+    }
+
+    public static Employee getEmployee(int id) {
+        return employees.stream().filter(employee -> employee.getId() == id) .findFirst().orElse(null);
     }
 }

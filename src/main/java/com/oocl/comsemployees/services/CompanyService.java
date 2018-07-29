@@ -28,7 +28,10 @@ public class CompanyService {
         boolean isSuccess = false;
         Optional optional = Database.getAllCompanies().stream().filter(company1 -> company1.getId() == companyId).findFirst();
         if (optional.isPresent()) {
-            Database.getAllCompanies().set(Database.getAllCompanies().indexOf(optional.get()), company);
+            Company company1 = (Company)optional.get();
+            company1.setCompanyName(company.getCompanyName());
+            company1.setEmployeesNumber(company.getEmployeesNumber());
+            company1.setEmployees(company.getEmployees());
             isSuccess = true;
         }
         return isSuccess;
@@ -38,5 +41,17 @@ public class CompanyService {
         Company company = Database.getAllCompanies().stream().filter(company1 -> company1.getId() == companyId).findFirst().get();
         company.getEmployees().forEach(employee -> Database.getAllEmployees().remove(employee));
         return Database.getAllCompanies().remove(company);
+    }
+
+    public List<Company> getcompaniesInPage(int page, int size) {
+        int listsize = Database.getAllCompanies().size();
+        int start, end;
+        if ((page - 1) * size < listsize) {
+            start = (page - 1) * size;
+        } else {
+            return null;
+        }
+        end = page * size > listsize ? listsize : page * size;
+        return Database.getAllCompanies().subList(start, end);
     }
 }

@@ -44,13 +44,18 @@ public class CompanyController {
         return map;
     }
 
+    @GetMapping("/companies/{id}")
+    public Company getCompany(@PathVariable int id) {
+        return companyService.getCompany(id);
+    }
+
     @GetMapping("/companies/{id}/employees")
     public List<Employee> getEmployeesOfCompany(@PathVariable int id) {
-
+        return companyService.getCompany(id).getEmployees();
     }
 
     @GetMapping("/companies/page/{page}/pageSize/{size}")
     public List<Company> getCompaniesInPage(@PathVariable int page, @PathVariable int size) {
-
+        return companyService.getcompaniesInPage(page, size);
     }
 }
