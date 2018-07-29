@@ -63,7 +63,21 @@ public class CompanyControllerTest {
     }
 
     @Test
-    public
+    public void getCompanyById() throws Exception {
+        //given
+        Company company1 = new Company("abc", 20, new ArrayList<>());
+        given(service.getCompany(anyLong())).willReturn(company1);
+
+        //when
+        ResultActions resultActions = mockMvc.perform(get("/companies/{0}", 1L));
+
+        //then
+        resultActions
+                .andExpect(jsonPath("$.name", is("abc")));
+    }
+
+    @Test
+    public void
 
 
 }
