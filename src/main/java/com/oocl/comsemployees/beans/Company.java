@@ -1,26 +1,38 @@
 package com.oocl.comsemployees.beans;
 
+import javax.persistence.*;
 import java.util.List;
 
+@Entity
 public class Company {
-    private int id;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private long id;
+
     private String name;
     private int employeesNumber;
+
+    @OneToMany
     private List<Employee> employees;
 
     public Company(String name, int employeesNumber, List<Employee> employees) {
-        this.id = this.hashCode();
         this.name = name;
         this.employeesNumber = employeesNumber;
         this.employees = employees;
     }
 
+    public Company(){}
+
     public boolean addEmployee(Employee employee) {
         return employees.add(employee);
     }
 
-    public int getId() {
+    public long getId() {
         return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
     }
 
     public String getCompanyName() {

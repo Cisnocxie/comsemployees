@@ -3,6 +3,10 @@ package com.oocl.comsemployees.services;
 import com.oocl.comsemployees.Database;
 import com.oocl.comsemployees.beans.Company;
 import com.oocl.comsemployees.beans.Employee;
+import com.oocl.comsemployees.repositories.CompanyRepository;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
@@ -12,46 +16,35 @@ import java.util.Optional;
 
 @Component
 public class CompanyService {
+
+    @Autowired
+    private CompanyRepository componyRepository;
+
     public List<Company> getAllCompanies() {
-        return Database.getAllCompanies();
+        return componyRepository.findAll();
     }
 
-    public Company getCompany(int id) {
-        return Database.getCompany(id);
+    public Company getCompany(long id) {
+        return componyRepository.findById(id).get();
     }
 
-    public boolean postCompany(Company company) {
-        return Database.getAllCompanies().add(company);
+    public Company postCompany(Company company) {
+        return componyRepository.save(company);
     }
 
-    public boolean putCompany(int companyId, Company company) {
-        boolean isSuccess = false;
-        Optional optional = Database.getAllCompanies().stream().filter(company1 -> company1.getId() == companyId).findFirst();
-        if (optional.isPresent()) {
-            Company company1 = (Company)optional.get();
-            company1.setCompanyName(company.getCompanyName());
-            company1.setEmployeesNumber(company.getEmployeesNumber());
-            company1.setEmployees(company.getEmployees());
-            isSuccess = true;
-        }
-        return isSuccess;
+    public Company putCompany(long companyId, Company company) {
+        Company company1 = componyRepository.findById(companyId).get();
+        company1.setEmployees(company.getEmployees());
+        company1.setEmployeesNumber(company.getEmployeesNumber());
+        company1.setCompanyName(company.getCompanyName());
+        return componyRepository.save(company1);
     }
 
-    public boolean deleteCompany(int companyId) {
-        Company company = Database.getAllCompanies().stream().filter(company1 -> company1.getId() == companyId).findFirst().get();
-        company.getEmployees().forEach(employee -> Database.getAllEmployees().remove(employee));
-        return Database.getAllCompanies().remove(company);
+    public void deleteCompany(long companyId) {
+        componyRepository.deleteById(companyId);
     }
 
     public List<Company> getcompaniesInPage(int page, int size) {
-        int listsize = Database.getAllCompanies().size();
-        int start, end;
-        if ((page - 1) * size < listsize) {
-            start = (page - 1) * size;
-        } else {
-            return null;
-        }
-        end = page * size > listsize ? listsize : page * size;
-        return Database.getAllCompanies().subList(start, end);
+        return componyRepository.findAll(new PageRequest(page, size)).getContent();
     }
 }

@@ -1,15 +1,10 @@
-package com.oocl.comsemployees;
+package com.oocl.comsemployees.services;
 
 import com.oocl.comsemployees.beans.Company;
 import com.oocl.comsemployees.beans.Employee;
-import com.oocl.comsemployees.services.CompanyService;
-import com.oocl.comsemployees.services.EmployeeService;
 import org.junit.Test;
-import org.mockito.Mockito;
 
-import javax.validation.constraints.AssertTrue;
 import java.util.ArrayList;
-import java.util.Arrays;
 
 import static org.hamcrest.core.Is.is;
 import static org.junit.Assert.assertEquals;

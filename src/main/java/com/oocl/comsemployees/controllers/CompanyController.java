@@ -23,34 +23,27 @@ public class CompanyController {
     }
 
     @PostMapping("/companies")
-    public Map<String,String> postCompany(@RequestBody Company company) {
-        Map<String, String> map = new HashMap<>();
-        map.put("issuccess", companyService.postCompany(company) ? "true" : "false");
-        return map;
+    public Company postCompany(@RequestBody Company company) {
+        return companyService.postCompany(company);
     }
 
     @PutMapping("/companies/{companyId}")
-    public Map<String, String> putCompany(@PathVariable int companyId, @RequestBody Company company) {
-        Map<String, String> map = new HashMap<>();
-        map.put("issuccess", companyService.putCompany(companyId, company) ? "true" : "false");
-        return map;
+    public Company putCompany(@PathVariable long companyId, @RequestBody Company company) {
+        return companyService.putCompany(companyId, company);
     }
 
     @DeleteMapping("/companies/{companyId}")
-    public Map<String, String> deleteCompany(@PathVariable int companyId) {
-        Map<String, String> map = new HashMap<>();
-
-        map.put("issuccess", companyService.deleteCompany(companyId) ? "true" : "false");
-        return map;
+    public void deleteCompany(@PathVariable long companyId) {
+        companyService.deleteCompany(companyId);
     }
 
     @GetMapping("/companies/{id}")
-    public Company getCompany(@PathVariable int id) {
+    public Company getCompany(@PathVariable long id) {
         return companyService.getCompany(id);
     }
 
     @GetMapping("/companies/{id}/employees")
-    public List<Employee> getEmployeesOfCompany(@PathVariable int id) {
+    public List<Employee> getEmployeesOfCompany(@PathVariable long id) {
         return companyService.getCompany(id).getEmployees();
     }
 

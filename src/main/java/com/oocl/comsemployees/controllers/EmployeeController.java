@@ -22,30 +22,23 @@ public class EmployeeController {
     }
 
     @GetMapping("/employees/{id}")
-    public Employee getEmployee(@PathVariable int id) {
+    public Employee getEmployee(@PathVariable long id) {
         return employeeService.getEmployee(id);
     }
 
     @PostMapping("/employees")
-    public Map<String, String> postEmployee(@RequestBody Employee employee) {
-        Map<String, String> map = new HashMap<>();
-        map.put("success", employeeService.postEmployee(employee) ? "true" : "false");
-        return map;
+    public Employee postEmployee(@RequestBody Employee employee) {
+        return employeeService.postEmployee(employee);
     }
 
     @PutMapping("/employees/{id}")
-    public Map<String, String> putEmployee(@PathVariable int id, @RequestBody Employee employee) {
-        Map<String, String> map = new HashMap<>();
-        map.put("issuccess", employeeService.putEmployee(id, employee) ? "true" : "false");
-        return map;
+    public Employee putEmployee(@PathVariable long id, @RequestBody Employee employee) {
+        return employeeService.putEmployee(id, employee);
     }
 
     @DeleteMapping("/employees/{id}")
-    public Map<String, String> deleteEmployee(@PathVariable int id) {
-        Map<String, String> map = new HashMap<>();
-
-        map.put("issuccess", employeeService.deleteEmployee(id) ? "true" : "false");
-        return map;
+    public void deleteEmployee(@PathVariable long id) {
+        employeeService.deleteEmployee(id);
     }
 
     @GetMapping("/employees/male")

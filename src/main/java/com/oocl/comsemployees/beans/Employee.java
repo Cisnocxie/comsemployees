@@ -1,25 +1,35 @@
 package com.oocl.comsemployees.beans;
 
+import javax.persistence.*;
+
+@Entity
 public class Employee {
-    private int id;
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private long id;
+
     private String name;
     private int age;
     private String gender;
     private int salary;
 
+    private long companyId;
+
     public Employee(String name, int age, String gender, int salary) {
-        this.id = this.hashCode();
         this.name = name;
         this.age = age;
         this.gender = gender;
         this.salary = salary;
     }
 
-    public int getId() {
+    public Employee(){}
+
+    public long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(long id) {
         this.id = id;
     }
 
@@ -53,5 +63,13 @@ public class Employee {
 
     public void setSalary(int salary) {
         this.salary = salary;
+    }
+
+    public long getCompanyId() {
+        return companyId;
+    }
+
+    public void setCompanyId(long companyId) {
+        this.companyId = companyId;
     }
 }
