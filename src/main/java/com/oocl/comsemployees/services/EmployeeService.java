@@ -50,6 +50,6 @@ public class EmployeeService {
     }
 
     public List<Employee> getEmployeesInPage(int page, int size) {
-        return employeeRepository.findAll(new PageRequest(page, size)).getContent();
+        return employeeRepository.findAll(PageRequest.of(page-1, size)).getContent();
     }
 }
