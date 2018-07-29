@@ -2,6 +2,7 @@ package com.oocl.comsemployees.controllers;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.oocl.comsemployees.beans.Company;
+import com.oocl.comsemployees.beans.Employee;
 import com.oocl.comsemployees.services.CompanyService;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -101,5 +102,38 @@ public class CompanyControllerTest {
 
         //when, then
         mockMvc.perform(delete("/companies/{0}", 1L));
+    }
+
+    @Test
+    public void getCompanyEmployees() throws Exception {
+        //given
+        List<Employee> employees = new ArrayList<>(Arrays.asList(
+                new Employee("xiaoming", 21, "male", 8000),
+                new Employee("xiaohong", 22, "female", 8000)
+        ));
+        Company company1 = new Company("abc", 20, employees);
+        given(service.getCompany(anyLong())).willReturn(company1);
+
+        //when
+        ResultActions resultActions = mockMvc.perform(get("/companies/{0}/employees", 1L));
+
+        //then
+        resultActions
+                .andExpect(jsonPath("$[0].name", is("xiaoming")))
+                .andExpect(jsonPath("$[1].name", is("xiaohong")));
+    }
+
+    @Test
+    public void getCompaniesInPage() throws Exception {
+        //given
+        Company company1 = new Company("abc", 20, new ArrayList<>());
+        Company company2 = new Company("xyz", 50, new ArrayList<>());
+        Company company3 = new Company("ijk", 50, new ArrayList<>());
+        given(service.getcompaniesInPage(anyInt(), anyInt())).willReturn(new ArrayList<>(Collections.singletonList(company3)));
+
+        //when
+        ResultActions resultActions = mockMvc.perform(get("/companies/page/{0}/pageSize/{1}", 2, 2))
+                .andExpect(jsonPath("$[0].name", is("ijk")))
+                .andExpect(jsonPath("$[0].employeesNumber", is(50)));
     }
 }
