@@ -45,6 +45,6 @@ public class CompanyService {
     }
 
     public List<Company> getcompaniesInPage(int page, int size) {
-        return componyRepository.findAll(new PageRequest(page, size)).getContent();
+        return componyRepository.findAll(PageRequest.of(page - 1, size)).getContent();
     }
 }
