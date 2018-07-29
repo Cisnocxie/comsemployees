@@ -42,8 +42,8 @@ public class CompanyRepositoryTest {
         List<Company> companies = companyRepository.findAll();
 
         //then
-        assertThat(companies.get(0).getCompanyName(), is("abc"));
-        assertThat(companies.get(1).getCompanyName(), is("xyz"));
+        assertThat(companies.get(0).getName(), is("abc"));
+        assertThat(companies.get(1).getName(), is("xyz"));
     }
 
     @Test
@@ -55,7 +55,7 @@ public class CompanyRepositoryTest {
         Company company = companyRepository.findById(new Long(1)).orElse(null);
 
         //then
-        assertThat(company.getCompanyName(), is("abc"));
+        assertThat(company.getName(), is("abc"));
     }
 
     @Test
@@ -64,7 +64,7 @@ public class CompanyRepositoryTest {
         Company company = companyRepository.save(new Company("abc", 20, new ArrayList<>()));
 
         //then
-        assertThat(company.getCompanyName(), is("abc"));
+        assertThat(company.getName(), is("abc"));
     }
 
     @Test
@@ -90,6 +90,6 @@ public class CompanyRepositoryTest {
         List<Company> companies = companyRepository.findAll(PageRequest.of(1, 2)).getContent();
 
         //then
-        assertThat(companies.get(0).getCompanyName(), is("ijk"));
+        assertThat(companies.get(0).getName(), is("ijk"));
     }
 }

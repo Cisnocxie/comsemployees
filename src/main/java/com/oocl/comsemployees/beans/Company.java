@@ -35,12 +35,12 @@ public class Company {
         this.id = id;
     }
 
-    public String getCompanyName() {
+    public String getName() {
         return name;
     }
 
-    public void setCompanyName(String companyName) {
-        this.name = companyName;
+    public void setName(String name) {
+        this.name = name;
     }
 
     public int getEmployeesNumber() {

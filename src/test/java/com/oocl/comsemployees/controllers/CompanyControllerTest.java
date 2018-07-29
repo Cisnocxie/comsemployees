@@ -13,10 +13,9 @@ import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.ResultActions;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
 
+import static org.hamcrest.CoreMatchers.is;
 import static org.mockito.BDDMockito.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
@@ -36,7 +35,7 @@ public class CompanyControllerTest {
     private CompanyService service;
 
     @Test
-    public void postCompany_ReturnSuccess() throws Exception{
+    public void postCompany_ReturnOk() throws Exception{
         Company company = new Company("abc", 20, new ArrayList<>());
         given(service.postCompany(any(Company.class))).willReturn(company);
 
@@ -46,6 +45,25 @@ public class CompanyControllerTest {
 
         ressultAction.andExpect(status().isOk()).andDo(print());
     }
+
+    @Test
+    public void getAllComponies() throws Exception{
+        //given
+        Company company1 = new Company("abc", 20, new ArrayList<>());
+        Company company2 = new Company("xyz", 50, new ArrayList<>());
+        List<Company> companies = new ArrayList<>(Arrays.asList(company1, company2));
+        given(service.getAllCompanies()).willReturn(companies);
+
+        //when
+        ResultActions resultActions = mockMvc.perform(get("/companies"));
+
+        resultActions
+                .andExpect(jsonPath("$[0].name", is("abc")))
+                .andExpect(jsonPath("$[1].name", is("xyz")));
+    }
+
+    @Test
+    public
 
 
 }

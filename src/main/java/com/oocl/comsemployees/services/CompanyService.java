@@ -36,7 +36,7 @@ public class CompanyService {
         Company company1 = componyRepository.findById(companyId).get();
         company1.setEmployees(company.getEmployees());
         company1.setEmployeesNumber(company.getEmployeesNumber());
-        company1.setCompanyName(company.getCompanyName());
+        company1.setName(company.getName());
         return componyRepository.save(company1);
     }
 
